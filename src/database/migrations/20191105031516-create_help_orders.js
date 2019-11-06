@@ -1,32 +1,30 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('students', {
+    return queryInterface.createTable('help_orders', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      age: {
+      student_id: {
         type: Sequelize.INTEGER,
+        references: { model: 'students', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
         allowNull: false,
       },
-      weight: {
-        type: Sequelize.FLOAT,
+      question: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      height: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
+      answer: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      answer_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -40,6 +38,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('students');
+    return queryInterface.dropTable('help_orders');
   },
 };
