@@ -32,9 +32,9 @@ class AnswerController {
       return res.status(400).json({ error: 'Question not registred' });
     }
 
-    // if (helpOrder.answer_at) {
-    // return res.status(400).json({ error: 'Question already answered' });
-    // }
+    if (helpOrder.answer_at) {
+      return res.status(400).json({ error: 'Question already answered' });
+    }
 
     await helpOrder.update({
       answer,
