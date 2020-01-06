@@ -82,6 +82,7 @@ class RegisterController {
         'end_date',
         'price',
         'plan_id',
+        'active',
       ],
       include: [
         {
@@ -156,6 +157,37 @@ class RegisterController {
     await Register.destroy({ where: { id } });
 
     return res.send();
+  }
+
+  async show(req, res) {
+    /* LIstagem de planos por ID */
+    const { id } = req.params;
+
+    const register = await Register.findByPk(id, {
+      attributes: [
+        'id',
+        'student_id',
+        'start_date',
+        'end_date',
+        'price',
+        'plan_id',
+        'active',
+      ],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['name', 'age'],
+        },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['title', 'duration', 'price'],
+        },
+      ],
+    });
+
+    return res.json(register);
   }
 }
 

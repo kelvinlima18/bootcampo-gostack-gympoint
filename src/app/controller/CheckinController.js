@@ -41,7 +41,7 @@ class CheckinController {
     const checkins = await Checkin.findAll({
       where: { student_id },
       attributes: ['student_id', 'created_at'],
-      order: ['created_at'],
+      order: [['created_at', 'DESC']],
       include: [
         {
           model: Student,

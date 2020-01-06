@@ -55,7 +55,7 @@ class HelpOrderController {
 
     const questions = await HelpOrder.findAll({
       where: { student_id },
-      order: ['created_at'],
+      order: [['created_at', 'DESC']],
       include: [
         {
           model: Student,

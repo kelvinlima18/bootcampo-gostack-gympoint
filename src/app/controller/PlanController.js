@@ -72,6 +72,15 @@ class PlanController {
 
     return res.send();
   }
+
+  async show(req, res) {
+    /* LIstagem de planos por ID */
+    const { id } = req.params;
+
+    const plan = await Plan.findByPk(id);
+
+    return res.json(plan);
+  }
 }
 
 export default new PlanController();
